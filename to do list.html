@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDOList</title>
+    <style>
+        body{
+            background-size: cover;
+            background-image:url("picwes");
+            background-repeat: no-repeat;
+        }
+        .main{
+            margin-right: 300px;
+            margin-left: 300px;
+            margin-top: 70px;
+            background-color: rgb(239, 182, 217);
+            /* height:750px;   */
+            border: 2px solid black;
+            box-shadow: 5px 5px 5px gray;
+            z-index: 20;
+            mix-blend-mode:luminosity;
+        }
+        .head
+        {
+            background-color: rgb(230, 50, 143);
+            color: rgb(247, 240, 240);
+            margin-top: -47px;
+            z-index: 10;
+            
+        }
+        h1{
+            text-align: center;
+            font-size: 70px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding-top: 30px;
+            text-shadow: 2px 2px 2px black;
+            
+        }
+        #add{
+            margin-left: 260px;
+            padding: 13px;
+            padding-right: 200px;
+            font-size: 20px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: none;
+            border: 1px solid gray;
+            margin-bottom: 20px;
+           
+            
+        }
+        .button{
+            padding: 18px 30px 16px 30px;
+            border-radius: 3px;
+            border: none;
+            border: 1px solid gray;
+            background-color:rgb(252, 185, 181);
+            color:black;
+            font-weight: bolder;
+            cursor:pointer;
+            margin-bottom: 20px;
+        }
+        .button:hover
+        {
+            background-color:rgb(255, 120, 113);
+            color:rgb(241, 228, 228);
+            border: 1px solid black;
+        }
+        .list{
+            margin-top: 60px;
+        }
+        #ul
+        {
+            display: block;
+            list-style-type: none;
+            margin-bottom: 100px;
+           
+        }
+        .item{
+            margin: 15px 65px 15px 20px;
+            background-color: rgb(230, 50, 143);
+            padding: 10px;
+            font-size: 25px;
+            border-radius: 5px;
+            padding-left: 30px;
+            cursor: pointer;
+        }
+        .item:hover{
+            background-color:rgb(231, 231, 231);
+            color: rgb(230, 50, 143);
+            border: 1px solid black;
+        }
+        .close{
+            float:right;
+            padding-right: 20px;
+            cursor: pointer;
+        }
+        ul li.checked {
+            background: rgb(248, 185, 83);
+            color: rgb(8, 0, 0);
+            text-decoration: line-through;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="head">
+            <h1>To Do List</h1>
+           <input type="text" placeholder="Enter Task..." id="add">
+           <button class="button" onclick="addtask()">ADD</button>
+        </div>
+
+        <div class="list">
+            <ul id="ul">
+                <li class="item" >Wake up Early </li>
+                <li class="item" >Do yoga for 30 minutes</li>
+                <li class="item" >Study for 2 hour</li>
+                <!-- <li class="item" >Go for College</li> -->
+                <!-- <li class="item" >Go for Java classes</li> -->
+                <li class="item" >Doing preparation for Examination</li>
+                <li class="item" >Complete the home assignments</li>
+                <li class="item" >Start React.js Learning</li>
+                <li class="item" >Read The Alchemist Book</li>
+
+                
+            </ul>
+        </div>
+      
+    </div>
+    <script>
+        
+        var addcross = document.getElementsByTagName("LI");
+        var i;
+        for (i = 0; i < addcross.length; i++)
+        {
+            var span = document.createElement("SPAN");
+            var cross = document.createTextNode("\u00D7");
+            span.className = "close";
+            
+            span.appendChild(cross);
+            addcross[i].appendChild(span);
+        }
+
+        var close = document.getElementsByClassName("close");
+        var i;
+        for (i = 0; i < close.length; i++) 
+        {
+            close[i].onclick = function() 
+            {
+                var div = this.parentElement;
+                div.style.display = "none";
+            }
+        }
+
+        var list = document.querySelector('ul');
+        list.addEventListener('click',
+            function(ev)
+            {
+                if (ev.target.tagName === 'LI')
+                {
+                    ev.target.classList.toggle('checked');
+                }
+            }
+        , false);
+
+        
+        function addtask()
+        {
+            var li = document.createElement("li");
+            var inputValue = document.getElementById("add").value;
+            var t = document.createTextNode(inputValue);
+            li.appendChild(t);
+
+            if (inputValue == '')
+            {
+                alert("You must write something!");
+            }
+            else{
+                document.getElementById("ul").appendChild(li);
+                li.className="item";
+            }
+            document.getElementById("add").value = "";
+
+            var span = document.createElement("SPAN");
+            var txt = document.createTextNode("\u00D7");
+            span.className = "close";
+            span.appendChild(txt);
+            li.appendChild(span);
+
+            for (i = 0; i < close.length; i++) 
+            {
+                close[i].onclick = function() 
+                {
+                    var div = this.parentElement;
+                    div.style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
